@@ -6,8 +6,8 @@
 
 ## Log Format and Location
 
-**Primary Format**: `logs/ai_prompts_YYYY-MM-DD.log` (Structured text format)
-**Alternative Format**: `.ai/log.jsonl` (JSON Lines format for machine processing)
+**Primary Format**: `./logs/ai_prompts_YYYY-MM-DD.log` (Structured text format)
+**Alternative Format**: `./logs/ai/log.jsonl` (JSON Lines format for machine processing)
 
 **Required Information**:
 - Timestamp of interaction
@@ -59,17 +59,17 @@ The system supports both traditional text logs and JSONL format for compatibilit
 ### Primary Logging Tool
 ```bash
 # Interactive completion entry
-./scripts/ai_log.sh --complete
+./tools/logging/ai_log.sh --complete
 
 # Manual entry (text format)
-./scripts/ai_log.sh --task="Repository Setup" --status="COMPLETED" \
-  --deliverables="Docker infrastructure, monitoring, security guides"
+./tools/logging/ai_log.sh --task="Repository Setup" --status="COMPLETED" \
+  --deliverables="Infrastructure setup, documentation"
 
 # JSONL format entry (for automation)
-echo "Updated compose for Ghostnet" | scripts/ai_log.sh ops update --files docker/compose.ghostnet.yml
+echo "Updated config" | ./tools/logging/ai_log.sh ops update --files config.yml
 
 # Session summary
-./scripts/ai_log.sh --session
+./tools/logging/ai_log.sh --session
 ```
 
 ### Cross-Project Tool (Agents Repository)
@@ -86,33 +86,30 @@ echo "Updated compose for Ghostnet" | scripts/ai_log.sh ops update --files docke
 ### Daily Operations
 ```bash
 # Today's AI interactions
-cat logs/ai_prompts_$(date +%Y-%m-%d).log
+cat ./logs/ai_prompts_$(date +%Y-%m-%d).log
 
 # Recent activity across all logs
-tail -f logs/ai_prompts_*.log
+tail -f ./logs/ai_prompts_*.log
 
 # Search for specific tasks
-grep "TASK_TYPE: Repository" logs/ai_prompts_*.log
+grep "TASK_TYPE: Repository" ./logs/ai_prompts_*.log
 ```
 
 ### Analysis and Reporting
 ```bash
 # Weekly summary
-./scripts/ai_log.sh --summary --week
+./tools/logging/ai_log.sh --summary --week
 
 # Daily summary generation (JSONL to markdown)
-jq -r 'select(.ts|startswith("'"$(date +%F)"'")) | "- [\(.ts)] \(.category)/\(.action) (\(.files|join(", ")))"' .ai/log.jsonl > logs/ai/$(date +%F).md
+jq -r 'select(.ts|startswith("'"$(date +%F)"'")) | "- [\(.ts)] \(.category)/\(.action) (\(.files|join(", ")))"' ./logs/ai/log.jsonl > ./logs/ai/$(date +%F).md
 
-# Monthly productivity analysis
-./agents/tools/logging/analyze.sh --month
-
-# Cross-project insights
-./agents/tools/logging/aggregate.sh --projects
+# Generate daily summary
+./tools/logging/ai_log.sh --daily-summary
 ```
 
 ### Retention Policy
 - **Current month**: Keep daily logs accessible
-- **Historical**: Archive monthly logs in `logs/archive/YYYY-MM/`
+- **Historical**: Archive monthly logs in `./logs/archive/YYYY-MM/`
 - **Index**: Maintain searchable index of major implementations
 - **Cleanup**: Automated cleanup of logs older than 12 months
 
@@ -120,11 +117,8 @@ jq -r 'select(.ts|startswith("'"$(date +%F)"'")) | "- [\(.ts)] \(.category)/\(.a
 
 ### Script Logging Correlation
 ```bash
-# Combine AI logs with script logs for full picture
-./scripts/validate_logs.sh logs/
-
-# Monitor all activity in real-time
-tail -f logs/*.log | grep -E "(SUCCESS|ERROR|COMPLETED)"
+# Monitor AI activity in real-time
+tail -f ./logs/*.log | grep -E "(SUCCESS|ERROR|COMPLETED)"
 
 # Cross-reference AI tasks with script execution
 ./agents/tools/logging/correlate.sh --date=$(date +%Y-%m-%d)

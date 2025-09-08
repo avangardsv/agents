@@ -83,7 +83,7 @@ Backends follow NestJS modular structure; Prisma schema + seed scripts per envir
 ---
 
 ## Integration
-- Claude/ChatGPT must load `.owner-context/preferences.json` if present.
+- Claude/ChatGPT must load `agents/profiles/owner-context.md` if present.
 - Example validation:
   ```bash
   ./agents/tools/validation/check-context.sh --profile=owner

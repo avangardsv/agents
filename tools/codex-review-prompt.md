@@ -3,11 +3,11 @@
 ## Primary Prompt
 
 ```
-I need you to review my AI workflow management system (agents/ folder) and propose improvements. This system is designed to be a reusable, drop-in solution for any project to give AI agents consistent context about preferences, workflows, and quality standards.
+I need you to review my AI workflow management system (.agents/ folder) and propose improvements. This system is designed to be a reusable, drop-in solution for any project to give AI agents consistent context about preferences, workflows, and quality standards.
 
 CURRENT STRUCTURE:
 ```
-agents/
+.agents/
 ├── README.md              # Entry point and overview
 ├── rules/                 # AI behavior rules and guidelines  
 │   ├── communication.md   # Response style and verbosity rules
@@ -127,7 +127,7 @@ How can this system be optimized specifically for AI agents:
 
 ## Usage Instructions
 
-1. **Copy the primary prompt** and paste it to Codex with the current agents/ folder contents
+1. **Copy the primary prompt** and paste it to Codex with the current .agents/ folder contents
 2. **Review the recommendations** and prioritize based on your immediate needs
 3. **Use follow-up prompts** to get detailed implementation guidance for selected improvements
 4. **Integrate incrementally** - implement high-priority, simple improvements first

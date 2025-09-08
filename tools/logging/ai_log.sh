@@ -14,14 +14,15 @@ else
     log_error() { echo "[ERROR] $*" >&2; }
 fi
 
-LOG_DIR="$PROJECT_ROOT/logs"
-AI_LOG_DIR="$PROJECT_ROOT/logs/ai"
-JSONL_LOG="$PROJECT_ROOT/.ai/log.jsonl"
+AGENTS_DIR="$(dirname "$(dirname "$SCRIPT_DIR")")"
+LOG_DIR="$AGENTS_DIR/logs"
+AI_LOG_DIR="$AGENTS_DIR/logs/ai"
+JSONL_LOG="$AGENTS_DIR/logs/ai/log.jsonl"
 DATE=$(date '+%Y-%m-%d')
 TIME=$(date '+%Y-%m-%d %H:%M:%S')
 LOG_FILE="$LOG_DIR/ai_prompts_$DATE.log"
 
-mkdir -p "$LOG_DIR" "$AI_LOG_DIR" "$(dirname "$JSONL_LOG")"
+mkdir -p "$LOG_DIR" "$AI_LOG_DIR"
 
 show_help() {
     cat << 'EOF'
@@ -168,7 +169,7 @@ generate_daily_summary() {
         echo ""
         echo "## Detailed Logs"
         echo "- Text log: \`logs/ai_prompts_$DATE.log\`"
-        echo "- JSONL log: \`.ai/log.jsonl\`"
+        echo "- JSONL log: \`logs/ai/log.jsonl\`"
         
     } > "$summary_file"
     

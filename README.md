@@ -7,7 +7,7 @@ This directory contains reusable AI workflow components, rules, and tools that c
 ## Directory Structure
 
 ```
-agents/
+.agents/
 ├── README.md              # This file - entry point and overview
 ├── rules/                 # AI behavior rules and guidelines  
 │   ├── communication.md   # Communication style and verbosity rules
@@ -48,19 +48,19 @@ Utility tools that support the workflow system:
 ### Quick Start
 ```bash
 # Initialize AI workflow in new project
-cp -r agents/ /path/to/new-project/
+cp -r .agents/ /path/to/new-project/
 
 # Set up logging
 mkdir -p logs logs/ai .ai
-./agents/tools/logging/ai_log.sh --help
+./.agents/tools/logging/ai_log.sh --help
 ```
 
 ### Integration with Existing Projects
 ```bash
 # Add AI rules to existing project
-ln -s /path/to/agents/rules .claude/
-cp agents/tools/logging/ai_log.sh scripts/
-cp agents/tools/validation/check-config.sh scripts/
+ln -s /path/to/.agents/rules .claude/
+cp .agents/tools/logging/ai_log.sh scripts/
+cp .agents/tools/validation/check-config.sh scripts/
 ```
 
 ### Daily Workflow
@@ -161,16 +161,16 @@ This system replaces the single `.claude/agents.md` file with a structured appro
 ### Common Commands
 ```bash
 # Log AI work (structured text)
-./agents/tools/logging/ai_log.sh --complete
+./.agents/tools/logging/ai_log.sh --complete
 
 # Log AI work (JSONL format)
-echo "Updated compose config" | ./agents/tools/logging/ai_log.sh ops update --files docker/compose.yml
+echo "Updated compose config" | ./.agents/tools/logging/ai_log.sh ops update --files docker/compose.yml
 
 # Generate daily summary
-./agents/tools/logging/ai_log.sh --daily-summary
+./.agents/tools/logging/ai_log.sh --daily-summary
 
 # Validate configuration
-./agents/tools/validation/check-config.sh --all
+./.agents/tools/validation/check-config.sh --all
 ```
 
 This system provides a scalable, reusable foundation for AI-assisted development across multiple projects and teams.

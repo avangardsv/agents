@@ -44,10 +44,10 @@ EXTRACT FROM MY CHAT HISTORY:
 
 OUTPUT FORMAT:
 Generate structured markdown files ready to drop into:
-- agents/rules/vadym-preferences.md
-- agents/profiles/vadym-context.md  
-- agents/workflows/vadym-patterns.md
-- .claude/vadym-system-prompt.md
+- .agents/rules/owner-preferences.md
+- .agents/profiles/owner-context.md  
+- .agents/workflows/owner-patterns.md
+- .claude/owner-system-prompt.md
 
 Each file should be specific, actionable, and immediately usable by AI agents working on my projects.
 ```
@@ -74,8 +74,8 @@ The extracted preferences should integrate with our existing structure:
 
 ```bash
 # Add extracted preferences to our agents system
-./agents/tools/logging/ai_log.sh context extract --source=chatgpt
-./agents/tools/validation/check-context.sh --profile=vadym
+echo "Extracted owner context from ChatGPT" | ./.agents/tools/logging/ai_log.sh context extract --files=".agents/rules/owner-preferences.md,.agents/profiles/owner-context.md,.agents/workflows/owner-patterns.md,.claude/owner-system-prompt.md"
+./.agents/tools/validation/check-context.sh --profile=owner
 ```
 
 This approach will give you much more targeted and useful context extraction than the generic prompt you used.

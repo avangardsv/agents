@@ -1,0 +1,29 @@
+{
+  "ts": "2025-09-08T18:02:07.3NZ",
+  "category": "test",
+  "action": "multifiles",
+  "message": "test multiple files",
+  "files": [
+    "file1.js",
+    "file2.css",
+    "file3.html"
+  ]
+}
+{
+  "ts": "2025-09-08T18:02:07.3NZ",
+  "category": "dev",
+  "action": "implement",
+  "message": "task 1",
+  "files": [
+    "file1.js"
+  ]
+}
+{
+  "ts": "2025-09-08T18:02:07.3NZ",
+  "category": "ops",
+  "action": "deploy",
+  "message": "task 2",
+  "files": [
+    "docker-compose.yml"
+  ]
+}
