@@ -62,9 +62,6 @@ cd .agents && ./init.sh
 # Log AI work (JSONL format)
 echo "Updated config" | ./.agents/tools/logging/ai_log.sh ops update --files config.yml
 
-# Validate configurations
-./.agents/tools/validation/check-config.sh --all
-
 # Generate daily summary
 ./.agents/tools/logging/ai_log.sh --daily-summary
 ```
@@ -74,7 +71,7 @@ echo "Updated config" | ./.agents/tools/logging/ai_log.sh ops update --files con
 See `.agents/README.md` for complete documentation including:
 
 - **Rules**: AI behavior, communication style, coding standards
-- **Tools**: Logging utilities, validation scripts  
+- **Tools**: Logging utilities  
 - **Workflows**: PR templates, CI patterns, project blueprints
 - **Integration**: Cross-project usage and customization
 
@@ -98,11 +95,6 @@ The agents system requires:
 - `bash` (for scripts)
 - `jq` (for JSONL processing, optional)
 - Standard Unix tools (`grep`, `find`, `date`)
-
-For validation tools:
-- `docker` (for Docker config validation)
-- `yamllint` or `python3` (for YAML validation) 
-- `shellcheck` (for shell script validation, optional)
 
 ## Daily Usage
 

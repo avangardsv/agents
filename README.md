@@ -17,8 +17,7 @@ This directory contains reusable AI workflow components, rules, and tools that c
 ├── workflows/             # Workflow automation and templates
 │   └── (future workflow templates)
 └── tools/                 # Utility tools and scripts
-    ├── logging/          # Logging utilities and libraries
-    └── validation/       # Configuration validation tools
+    └── logging/           # Logging utilities and libraries
 ```
 
 ## Core Components
@@ -40,7 +39,6 @@ Framework for reusable workflow patterns:
 ### 🛠️ **Tool Integration**
 Utility tools that support the workflow system:
 - Structured logging libraries
-- Configuration validation scripts
 - Automation tools for common tasks
 
 ## Usage Patterns
@@ -60,15 +58,13 @@ mkdir -p logs logs/ai .ai
 # Add AI rules to existing project
 ln -s /path/to/.agents/rules .claude/
 cp .agents/tools/logging/ai_log.sh scripts/
-cp .agents/tools/validation/check-config.sh scripts/
 ```
 
 ### Daily Workflow
 1. **Start session**: Initialize logging for the day
 2. **Follow rules**: Apply communication and quality standards
-3. **Use tools**: Leverage validation and logging utilities
+3. **Use tools**: Leverage logging utilities
 4. **Log results**: Document AI interactions and outcomes
-5. **Validate**: Run quality checks and configuration validation
 
 ## Project Integration
 
@@ -76,7 +72,7 @@ cp .agents/tools/validation/check-config.sh scripts/
 - Copy entire `agents/` directory to project root
 - Symlink to `.claude/` for Claude Code integration
 - Initialize logging directory structure
-- Set up validation and logging tools
+- Set up logging tools
 
 ### For Existing Projects  
 - Symlink relevant rules to `.claude/`
@@ -105,10 +101,9 @@ cp .agents/tools/validation/check-config.sh scripts/
 4. **Integration**: Connect with existing tools and systems
 
 ### Tool Extensions
-1. **Custom validators**: Add project-specific validation rules
-2. **Automation scripts**: Create shortcuts for common tasks
-3. **Integration hooks**: Connect with external systems
-4. **Reporting tools**: Generate workflow analytics and reports
+1. **Automation scripts**: Create shortcuts for common tasks
+2. **Integration hooks**: Connect with external systems
+3. **Reporting tools**: Generate workflow analytics and reports
 
 ## Best Practices
 
@@ -155,7 +150,6 @@ This system replaces the single `.claude/agents.md` file with a structured appro
 ### Essential Files
 - `rules/logging.md` - Daily AI logging requirements
 - `tools/logging/ai_log.sh` - AI interaction logging script
-- `tools/validation/check-config.sh` - Configuration validation tool
 - `workflows/` - Future workflow templates
 
 ### Common Commands
@@ -169,8 +163,7 @@ echo "Updated compose config" | ./.agents/tools/logging/ai_log.sh ops update --f
 # Generate daily summary
 ./.agents/tools/logging/ai_log.sh --daily-summary
 
-# Validate configuration
-./.agents/tools/validation/check-config.sh --all
+
 ```
 
 This system provides a scalable, reusable foundation for AI-assisted development across multiple projects and teams.

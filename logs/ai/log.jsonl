@@ -27,3 +27,37 @@
     "docker-compose.yml"
   ]
 }
+{
+  "ts": "2025-09-08T19:31:35.3NZ",
+  "category": "test",
+  "action": "action",
+  "message": "gemini smoke test",
+  "files": []
+}
+{
+  "ts": "2025-09-08T19:32:11.3NZ",
+  "category": "test",
+  "action": "action",
+  "message": "gemini smoke test",
+  "files": [
+    "README.md"
+  ]
+}
+{
+  "ts": "2025-09-08T19:32:28.3NZ",
+  "category": "test",
+  "action": "overrides",
+  "message": "overrides jsonl",
+  "files": [
+    ".agents/README.md"
+  ]
+}
+{
+  "ts": "2025-09-08T19:46:05.3NZ",
+  "category": "test",
+  "action": "overrides",
+  "message": "overrides jsonl",
+  "files": [
+    ".agents/README.md"
+  ]
+}

@@ -46,35 +46,7 @@ Interactive logging session with prompts for all required fields.
 ```
 EOF
 
-    # Validation Command
-    cat > "$claude_dir/validate.md" << 'EOF'
-# Validate Configuration
-
-Validate all configuration files (Docker, YAML, JSON, shell scripts) in the project.
-
-## Usage
-Checks syntax and format of configuration files with detailed error reporting.
-
-## Execute
-```bash
-./.agents/tools/validation/check-config.sh --all
-```
-EOF
-
-    # Context Check Command  
-    cat > "$claude_dir/context.md" << 'EOF'
-# Check Agent Context
-
-Verify that all agent system files exist and contain valid content.
-
-## Usage
-Validates agent rules, profiles, workflows, and tools are properly configured.
-
-## Execute
-```bash
-./.agents/tools/validation/check-context.sh --profile=owner
-```
-EOF
+    # (Validation and context commands removed for lightweight setup)
 
     # Daily Summary Command
     cat > "$claude_dir/daily-summary.md" << 'EOF'
@@ -117,23 +89,7 @@ This will prompt for:
 """
 EOF
 
-    # Validation Command
-    cat > "$gemini_dir/validate.toml" << 'EOF'
-name = "validate"
-description = "Validate all project configurations"
-prompt = """
-Please run the configuration validation tool:
-
-./.agents/tools/validation/check-config.sh --all
-
-This checks:
-- Docker compose files
-- YAML configuration files  
-- JSON configuration files
-- Shell script syntax
-- Reports any syntax errors or issues found
-"""
-EOF
+    # (Validation command removed for lightweight setup)
 
     echo "[SUCCESS] Gemini CLI commands installed in $gemini_dir"
 }
@@ -215,7 +171,7 @@ fi
 
 echo "[SUCCESS] Command installation complete!"
 echo ""
-echo "Usage in Claude Code: /log, /validate, /context, /daily-summary"  
-echo "Usage in Gemini CLI: /log, /validate"
+echo "Usage in Claude Code: /log, /daily-summary"  
+echo "Usage in Gemini CLI: /log"
 echo ""
 echo "To uninstall: ./install-commands.sh --uninstall"
