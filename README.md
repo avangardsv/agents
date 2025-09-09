@@ -1,169 +1,143 @@
-# AI Workflow Management System
+# AI Agents Boilerplate
 
-## Overview
+This is a boilerplate repository for different AI agents that can be easily cloned and used across projects. Currently set up especially for interaction with Claude Code, with plans to expand to other AI systems.
 
-This directory contains reusable AI workflow components, rules, and tools that can be shared across different projects. It provides a standardized approach to AI-assisted development with logging, quality gates, and workflow automation.
+## Quick Setup
 
-## Directory Structure
+```bash
+# Clone this repository structure to your project
+cp -r .claude/ /path/to/your/project/
 
+# Or use git
+git clone <this-repo> your-project-agents
+cd your-project-agents
+cp -r .claude/ ../your-project/
 ```
-.agents/
-├── README.md              # This file - entry point and overview
-├── rules/                 # AI behavior rules and guidelines  
-│   ├── communication.md   # Communication style and verbosity rules
-│   ├── logging.md         # Daily logging requirements and formats
+
+## What's Included
+
+### 📁 `.claude/` Directory Structure
+```
+.claude/
+├── rules/                 # AI behavior rules and guidelines
+│   ├── communication.md   # Communication style and verbosity
+│   ├── logging.md         # Daily logging requirements
 │   ├── quality.md         # Code quality and security standards
-│   └── workflow.md        # Task management and tool usage patterns
-├── workflows/             # Workflow automation and templates
-│   └── (future workflow templates)
-└── tools/                 # Utility tools and scripts
-    └── logging/           # Logging utilities and libraries
+│   └── workflow.md        # Task management patterns
+├── workflows/             # Workflow automation templates
+│   └── logging.md         # Session logging workflow
+├── prompts/               # Reusable prompt templates
+│   └── logging.md         # Comprehensive logging system guide
+├── logs/                  # Session logs (auto-generated)
+│   ├── YYYY-MM-DD.md     # Daily session logs
+└── .claude-hooks/         # Claude Code hooks
+    └── user-prompt-submit.sh  # Auto-logging hook
 ```
 
-## Core Components
+## Current Focus: Claude Code Integration
 
-### 🔧 **Rules System**
-Standardized AI behavior patterns and requirements:
-- **Communication**: Concise, direct responses with minimal verbosity
-- **Logging**: Daily AI prompt results with structured format
-- **Quality**: Security-first code with production readiness
-- **Workflow**: TodoWrite usage and task management patterns
+This boilerplate is currently optimized for **Claude Code** with:
 
-### 🔄 **Workflow Templates**
-Framework for reusable workflow patterns:
-- Repository setup and initialization guidance
-- Infrastructure deployment best practices
-- Documentation generation standards
-- CI/CD pipeline recommendations
-
-### 🛠️ **Tool Integration**
-Utility tools that support the workflow system:
-- Structured logging libraries
-- Automation tools for common tasks
+- ✅ **Auto-logging hooks** - Captures every interaction
+- ✅ **Session tracking** - Time-based structured logging  
+- ✅ **Workflow templates** - Proven development patterns
+- ✅ **Quality rules** - Security and code standards
+- ✅ **Communication guidelines** - Consistent AI behavior
 
 ## Usage Patterns
 
-### Quick Start
-```bash
-# Initialize AI workflow in new project
-cp -r .agents/ /path/to/new-project/
-
-# Set up logging
-mkdir -p logs logs/ai .ai
-./.agents/tools/logging/ai_log.sh --help
-```
-
-### Integration with Existing Projects
-```bash
-# Add AI rules to existing project
-ln -s /path/to/.agents/rules .claude/
-cp .agents/tools/logging/ai_log.sh scripts/
-```
-
-### Daily Workflow
-1. **Start session**: Initialize logging for the day
-2. **Follow rules**: Apply communication and quality standards
-3. **Use tools**: Leverage logging utilities
-4. **Log results**: Document AI interactions and outcomes
-
-## Project Integration
-
 ### For New Projects
-- Copy entire `agents/` directory to project root
-- Symlink to `.claude/` for Claude Code integration
-- Initialize logging directory structure
-- Set up logging tools
+```bash
+# Copy the entire .claude structure
+cp -r .claude/ /path/to/new-project/
+
+# The hooks and rules will work immediately
+```
 
 ### For Existing Projects  
-- Symlink relevant rules to `.claude/`
-- Copy needed tools to scripts directory
-- Integrate logging with existing workflow
-- Gradually adopt workflow patterns
+```bash
+# Selectively copy what you need
+cp -r .claude/rules /path/to/project/.claude/
+cp -r .claude/.claude-hooks /path/to/project/.claude/
+```
 
-### For Team/Organization Use
-- Maintain central `agents/` repository
-- Use git submodules or package management
-- Standardize across all AI-assisted projects
-- Version control workflow improvements
+## Future AI Systems
 
-## Customization Guide
+This boilerplate will expand to support:
+- **Gemini CLI** - Google's AI system
+- **OpenAI API** - ChatGPT integration
+- **Local models** - Ollama, LM Studio
+- **Custom agents** - Project-specific AI workflows
 
-### Adapting Rules
-1. **Communication**: Adjust verbosity levels per project needs
-2. **Logging**: Customize log formats and retention policies  
-3. **Quality**: Add project-specific quality gates
-4. **Workflow**: Modify task management patterns
+Each AI system will have its own optimized configuration while maintaining the same core structure.
 
-### Workflow Customization
-1. **Environment-specific**: Adapt workflows for dev/staging/prod
-2. **Technology stack**: Modify for different languages/frameworks
-3. **Compliance**: Add regulatory or organizational requirements
-4. **Integration**: Connect with existing tools and systems
+## Key Features
 
-### Tool Extensions
-1. **Automation scripts**: Create shortcuts for common tasks
-2. **Integration hooks**: Connect with external systems
-3. **Reporting tools**: Generate workflow analytics and reports
+### 🔧 **Rules System**
+Standardized AI behavior patterns:
+- Communication style (concise, direct)
+- Logging requirements (structured format)
+- Quality standards (security-first)
+- Workflow patterns (TodoWrite usage)
+
+### 📝 **Logging System**
+Comprehensive session tracking:
+- Time-based entries (`## HH:MM - Title`)
+- Structured format (Variant B)
+- Auto-hooks for Claude Code
+- AI-readable simple structure
+
+### 🔄 **Workflow Templates**
+Ready-to-use patterns for:
+- Repository setup and initialization
+- Development session management
+- Documentation generation
+- CI/CD pipeline integration
+
+## Customization
+
+### Project-Specific Rules
+Edit files in `.claude/rules/` to match your:
+- Project requirements
+- Team standards  
+- Compliance needs
+- Technology stack
+
+### Hook Customization
+Modify `.claude/.claude-hooks/` for:
+- Different logging formats
+- Custom automation triggers
+- Integration with external systems
+- Team-specific workflows
 
 ## Best Practices
 
 ### Implementation
-- **Start small**: Begin with rules and basic logging
-- **Iterate**: Gradually add more tools and workflows
-- **Standardize**: Use consistent patterns across projects
-- **Document**: Keep usage examples and customizations documented
+1. **Start simple** - Use basic logging and rules first
+2. **Iterate gradually** - Add more tools and workflows over time
+3. **Maintain consistency** - Use same patterns across projects
+4. **Document changes** - Keep customizations tracked
 
 ### Maintenance
-- **Version control**: Track changes to rules and tools
-- **Review regularly**: Update based on lessons learned
-- **Share improvements**: Contribute back to central repository
-- **Monitor effectiveness**: Track workflow success and pain points
+- **Version control** - Track changes to rules and workflows
+- **Regular updates** - Refine based on usage lessons
+- **Share improvements** - Contribute back to boilerplate
+- **Test thoroughly** - Validate configurations before deployment
 
-### Quality Assurance
-- **Test tools**: Validate scripts and configurations before use
-- **Review logs**: Ensure logging provides value
-- **Measure outcomes**: Track productivity and quality metrics
-- **Continuous improvement**: Refine based on experience
+## Contributing
 
-## Migration from .claude/agents.md
+This boilerplate improves through real usage. Please contribute:
+- New AI system integrations
+- Improved workflow templates  
+- Better rule definitions
+- Usage pattern documentation
 
-This system replaces the single `.claude/agents.md` file with a structured approach:
+## License
 
-### What Moved Where
-- **Daily logging rules** → `rules/logging.md`
-- **Communication style** → `rules/communication.md`  
-- **Quality standards** → `rules/quality.md`
-- **Tool usage patterns** → `rules/workflow.md`
-- **Project structure** → This README and tools
-
-### Migration Steps
-1. Review existing `.claude/agents.md` for custom rules
-2. Map custom rules to appropriate files in `rules/`
-3. Update logging tools to use new structure
-4. Set up directory structure (`logs/`, `logs/ai/`, `.ai/`)
-5. Test workflow with new organization
+Open source - use freely across projects and teams.
 
 ---
 
-## Quick Reference
-
-### Essential Files
-- `rules/logging.md` - Daily AI logging requirements
-- `tools/logging/ai_log.sh` - AI interaction logging script
-- `workflows/` - Future workflow templates
-
-### Common Commands
-```bash
-# Log AI work (structured text)
-./.agents/tools/logging/ai_log.sh --complete
-
-# Log AI work (JSONL format)
-echo "Updated compose config" | ./.agents/tools/logging/ai_log.sh ops update --files docker/compose.yml
-
-# Generate daily summary
-./.agents/tools/logging/ai_log.sh --daily-summary
-
-
-```
-
-This system provides a scalable, reusable foundation for AI-assisted development across multiple projects and teams.
+**Current Status**: Optimized for Claude Code  
+**Next**: Gemini CLI and OpenAI integrations  
+**Vision**: Universal AI agents boilerplate for any project
