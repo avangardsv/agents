@@ -21,26 +21,29 @@ cp -r .claude/ ../your-project/
 .claude/
 ├── rules/                 # AI behavior rules and guidelines
 │   ├── communication.md   # Communication style and verbosity
-│   ├── logging.md         # Daily logging requirements
-│   ├── quality.md         # Code quality and security standards
+│   ├── owner-preferences.md # Owner engineering preferences
 │   └── workflow.md        # Task management patterns
-├── workflows/             # Workflow automation templates
-│   └── logging.md         # Session logging workflow
-├── prompts/               # Reusable prompt templates
-│   └── logging.md         # Comprehensive logging system guide
-├── logs/                  # Session logs (auto-generated)
-│   ├── YYYY-MM-DD.md     # Daily session logs
-└── .claude-hooks/         # Claude Code hooks
-    └── user-prompt-submit.sh  # Auto-logging hook
+├── hooks/                 # 🔥 TypeScript hooks for Claude Code
+│   ├── index.ts          # Main hook configuration
+│   ├── lib.ts            # Hook infrastructure
+│   ├── session.ts        # Session persistence
+│   └── package.json      # Bun dependencies
+├── docs/                  # Documentation and roadmaps
+│   └── agent-development-roadmap.md # Future development planning
+├── logs/                  # 📝 Auto-generated session logs
+│   └── YYYY-MM-DD.md     # Daily session logs (Variant B format)
+├── exports/               # Claude Code conversation exports
+└── settings.json          # Claude Code configuration
 ```
 
 ## Current Focus: Claude Code Integration
 
 This boilerplate is currently optimized for **Claude Code** with:
 
-- ✅ **Auto-logging hooks** - Captures every interaction
-- ✅ **Session tracking** - Time-based structured logging  
-- ✅ **Workflow templates** - Proven development patterns
+- ✅ **TypeScript Hooks** - Full integration with Claude Code pipeline
+- ✅ **Auto-logging** - Captures every interaction in structured format
+- ✅ **Session tracking** - Time-based Variant B logging  
+- ✅ **Smart titles** - Automatic categorization of requests
 - ✅ **Quality rules** - Security and code standards
 - ✅ **Communication guidelines** - Consistent AI behavior
 
@@ -51,15 +54,39 @@ This boilerplate is currently optimized for **Claude Code** with:
 # Copy the entire .claude structure
 cp -r .claude/ /path/to/new-project/
 
-# The hooks and rules will work immediately
+# Start the hooks system
+cd /path/to/new-project/.claude/hooks
+bun run index.ts
 ```
 
 ### For Existing Projects  
 ```bash
 # Selectively copy what you need
 cp -r .claude/rules /path/to/project/.claude/
-cp -r .claude/.claude-hooks /path/to/project/.claude/
+cp -r .claude/hooks /path/to/project/.claude/
 ```
+
+## Hook System Setup
+
+### Prerequisites
+- **Bun** installed (fast JavaScript runtime)
+- **Claude Code** with hooks support
+
+### Quick Start
+```bash
+# Navigate to hooks directory
+cd .claude/hooks
+
+# Start the hook system (run once per session)
+bun run index.ts
+```
+
+### What It Does
+- 🪝 **Intercepts every user prompt**
+- 📝 **Auto-creates logs** in `.claude/logs/YYYY-MM-DD.md`
+- 🎯 **Generates smart titles** based on request content
+- ⚡ **Fast execution** with Bun runtime
+- 🔧 **Extensible** - Full TypeScript support
 
 ## Future AI Systems
 
@@ -76,23 +103,22 @@ Each AI system will have its own optimized configuration while maintaining the s
 ### 🔧 **Rules System**
 Standardized AI behavior patterns:
 - Communication style (concise, direct)
-- Logging requirements (structured format)
+- Owner engineering preferences
 - Quality standards (security-first)
 - Workflow patterns (TodoWrite usage)
 
-### 📝 **Logging System**
+### 📝 **Automatic Logging System**
 Comprehensive session tracking:
 - Time-based entries (`## HH:MM - Title`)
-- Structured format (Variant B)
-- Auto-hooks for Claude Code
+- Structured Variant B format
+- TypeScript hooks for Claude Code
 - AI-readable simple structure
 
-### 🔄 **Workflow Templates**
-Ready-to-use patterns for:
-- Repository setup and initialization
-- Development session management
-- Documentation generation
-- CI/CD pipeline integration
+### 📚 **Documentation System**
+Ready-to-use documentation:
+- Agent development roadmap
+- Implementation guides
+- Best practices from real usage
 
 ## Customization
 
@@ -104,7 +130,7 @@ Edit files in `.claude/rules/` to match your:
 - Technology stack
 
 ### Hook Customization
-Modify `.claude/.claude-hooks/` for:
+Modify `.claude/hooks/index.ts` for:
 - Different logging formats
 - Custom automation triggers
 - Integration with external systems
@@ -114,7 +140,7 @@ Modify `.claude/.claude-hooks/` for:
 
 ### Implementation
 1. **Start simple** - Use basic logging and rules first
-2. **Iterate gradually** - Add more tools and workflows over time
+2. **Run hooks** - Start `bun run index.ts` each session
 3. **Maintain consistency** - Use same patterns across projects
 4. **Document changes** - Keep customizations tracked
 
@@ -128,7 +154,7 @@ Modify `.claude/.claude-hooks/` for:
 
 This boilerplate improves through real usage. Please contribute:
 - New AI system integrations
-- Improved workflow templates  
+- Improved hook implementations  
 - Better rule definitions
 - Usage pattern documentation
 
@@ -138,6 +164,6 @@ Open source - use freely across projects and teams.
 
 ---
 
-**Current Status**: Optimized for Claude Code  
+**Current Status**: ✅ Working TypeScript hooks for Claude Code  
 **Next**: Gemini CLI and OpenAI integrations  
 **Vision**: Universal AI agents boilerplate for any project
