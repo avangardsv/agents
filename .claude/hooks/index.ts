@@ -102,8 +102,15 @@ const notification: NotificationHandler = async (payload) => {
 const stop: StopHandler = async (payload) => {
   await saveSessionData('Stop', {...payload, hook_type: 'Stop'} as const)
 
-  // Example: Summary or cleanup logic
-  console.log(`👋 Session ended`)
+  // Play completion sound from local project file
+  try {
+    const soundPath = `${import.meta.dir}/sounds/completion.aiff`
+    await Bun.$`afplay ${soundPath}`
+    
+    console.log(`👋 Session ended with notification sound`)
+  } catch (error) {
+    console.log(`👋 Session ended (sound failed: ${error})`)
+  }
 
   return {} // Return empty object to continue normally
 }

@@ -1,0 +1,28 @@
+[
+  {
+    "timestamp": "2025-09-12T19:47:31.179Z",
+    "hookType": "UserPromptSubmit",
+    "payload": {
+      "session_id": "c1767f18-41d9-4de8-ad8b-16bb5c9c541f",
+      "transcript_path": "/Users/admin/.claude/projects/-Users-admin-demo--agents/c1767f18-41d9-4de8-ad8b-16bb5c9c541f.jsonl",
+      "cwd": "/Users/admin/demo/.agents",
+      "permission_mode": "bypassPermissions",
+      "hook_event_name": "UserPromptSubmit",
+      "prompt": "ANTHROPIC_LOG=debug",
+      "hook_type": "UserPromptSubmit"
+    }
+  },
+  {
+    "timestamp": "2025-09-12T19:47:35.097Z",
+    "hookType": "Stop",
+    "payload": {
+      "session_id": "c1767f18-41d9-4de8-ad8b-16bb5c9c541f",
+      "transcript_path": "/Users/admin/.claude/projects/-Users-admin-demo--agents/c1767f18-41d9-4de8-ad8b-16bb5c9c541f.jsonl",
+      "cwd": "/Users/admin/demo/.agents",
+      "permission_mode": "bypassPermissions",
+      "hook_event_name": "Stop",
+      "stop_hook_active": false,
+      "hook_type": "Stop"
+    }
+  }
+]
