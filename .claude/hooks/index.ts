@@ -12,24 +12,40 @@ import type {
 } from './lib'
 import {runHook} from './lib'
 import {saveSessionData} from './session'
+import {appendFile, mkdir} from 'node:fs/promises'
+import * as path from 'node:path'
 
-// Helper function to log using log-ai-chat script
-async function logToAIChat(title: string, content: string, role: string = 'response') {
+// Helper function to log to daily markdown file
+async function logToDaily(prompt: string) {
   try {
-    const scriptPath = `${import.meta.dir}/../../scripts/log-ai-chat.sh`
-    await Bun.$`echo ${content} | bash ${scriptPath} --source=claude --title=${title} --role=${role}`
+    const logsDir = path.join(process.cwd(), 'logs')
+    const today = new Date().toISOString().split('T')[0] // YYYY-MM-DD
+    const time = new Date().toTimeString().slice(0, 5) // HH:MM
+    const logFile = path.join(logsDir, `${today}.md`)
+    
+    await mkdir(logsDir, {recursive: true})
+    
+    const entry = `## ${time} - User Prompt
+
+User: ${prompt}
+
+*Source: Claude Code Hooks*
+
+---
+
+`
+    
+    await appendFile(logFile, entry)
   } catch (error) {
-    console.error('Failed to log to AI chat:', error)
+    console.error('Failed to log to daily file:', error)
   }
 }
+
 
 // SessionStart handler - called when a new Claude session starts
 const sessionStart: SessionStartHandler = async (payload) => {
   // Save session data (optional - remove if not needed)
   await saveSessionData('SessionStart', {...payload, hook_type: 'SessionStart'} as const)
-  
-  // Log to AI chat system
-  await logToAIChat('Session Started', `New Claude Code session started from: ${payload.source}\nSession ID: ${payload.session_id}`)
 
   // Example: Log session start with source
   console.log(`🚀 New session started from: ${payload.source}`)
@@ -114,9 +130,6 @@ const notification: NotificationHandler = async (payload) => {
 // Stop handler - called when Claude stops
 const stop: StopHandler = async (payload) => {
   await saveSessionData('Stop', {...payload, hook_type: 'Stop'} as const)
-  
-  // Log session end to AI chat system
-  await logToAIChat('Session Ended', 'Claude Code session completed')
 
   // Play completion sound from local project file
   try {
@@ -151,8 +164,8 @@ const subagentStop: SubagentStopHandler = async (payload) => {
 const userPromptSubmit: UserPromptSubmitHandler = async (payload) => {
   await saveSessionData('UserPromptSubmit', {...payload, hook_type: 'UserPromptSubmit'} as const)
   
-  // Log user prompt to AI chat system
-  await logToAIChat('User Prompt', payload.prompt, 'prompt')
+  // Log to daily markdown file
+  await logToDaily(payload.prompt)
 
   // Example: Log user prompts
   console.log(`💬 User prompt: ${payload.prompt}`)
