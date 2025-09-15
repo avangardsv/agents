@@ -25,13 +25,13 @@ async function logToDaily(prompt: string) {
     
     await mkdir(logsDir, {recursive: true})
     
-    const entry = `## ${time} - User Prompt
-
-User: ${prompt}
-
-*Source: Claude Code Hooks*
-
----
+    // Check if User Inputs section exists, if not create it
+    const entry = `### ${time} - User Interaction
+- **Problem**: User submitted a new prompt for processing.
+- **Investigation**: Received prompt: "${prompt.substring(0, 80)}${prompt.length > 80 ? '...' : ''}"
+- **Solution**: Logged user input to daily file with timestamp.
+- **Outcome**: User prompt captured for team visibility and session tracking.
+- **Files**: logs/${today}.md
 
 `
     
