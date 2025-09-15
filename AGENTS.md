@@ -6,7 +6,7 @@
   - `rules/` — communication, workflow, and quality rules
   - `logs/` — auto-generated daily logs for Claude sessions
   - `exports/`, `docs/`, `settings.json` — exports, docs, config
-- `scripts/` — helper scripts (e.g., `log-ai-chat.sh` for log capture)
+  
 - `schemas/` — JSON/task schemas (e.g., `tasks.json`)
 - `logs/` — project-level logs (ignored by Git)
 - `temp/` — scratch space (ignored)
@@ -20,11 +20,38 @@
   - Shell: `shellcheck script.sh && bash -n script.sh`
 
 ## AI Logging Policy (Required)
-- Log every time you ask or get an AI reply using the script.
-- Clipboard: `make log-clipboard` (title auto‑set to today’s date)
-- File: `make log-file FILE=transcript.txt` (title auto‑set to today’s date)
-- Default source is `claude`; override via `make log-clipboard SOURCE=codex` if needed.
-- Outputs go to `logs/ai/YYYY-MM-DD.md` and `logs/notes/YYYYMMDD.txt`.
+- One file per day: `.claude/logs/YYYY-MM-DD.md` (date only in filename).
+- When to log: any focused work session (>30 minutes), especially debugging/design.
+- Structure per entry:
+  - `# YYYY-MM-DD - [Brief Session Summary]`
+  - `## Work Done` — tasks, features, bug fixes
+  - `## Debugging Process` — problems, investigation, attempts (success/failed)
+  - `## Lessons Learned` — insights, practices, gotchas
+  - `## Technical Details` — code changes, file paths, deps
+  - `## Next Steps` — remaining tasks and follow‑ups
+- Notes:
+  - Use concise, commit‑style bullets; include file paths/lines when helpful.
+  - Append multiple sessions to the same day’s file.
+  - No separate notes file; keep everything in the daily log.
+
+### Quick Start
+- Create/open: `.claude/logs/$(date +%F).md`
+- Paste the headings above and fill them for your session.
+
+### Prompt For Another AI (to draft a log)
+Copy and paste:
+"""
+You are assisting with daily engineering logs for this repository.
+Summarize today’s work into Markdown using this structure:
+1) # YYYY-MM-DD - [Brief Session Summary]
+2) ## Work Done
+3) ## Debugging Process
+4) ## Lessons Learned
+5) ## Technical Details (code changes, file paths)
+6) ## Next Steps
+Keep it concise but complete. Output only the Markdown to append into .claude/logs/YYYY-MM-DD.md.
+"""
+
 
 ## Coding Style & Naming Conventions
 - Language: TypeScript (ES modules) in `.claude/hooks/`
