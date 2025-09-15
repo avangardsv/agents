@@ -15,6 +15,18 @@ cd .claude/hooks
 bun install
 ```
 
+### Logging
+```bash
+# Manual logging entry using log-ai-chat
+./scripts/log-ai-chat.sh --source=claude --title="Manual Entry"
+
+# View today's AI logs
+cat logs/ai/$(date +%Y-%m-%d).md
+
+# View notes
+cat logs/notes/$(date +%Y%m%d).txt
+```
+
 ### Testing and Validation
 ```bash
 # Validate YAML files
@@ -34,7 +46,7 @@ This is an **AI Agents Boilerplate** repository designed to provide reusable Cla
 
 ### Hook System (.claude/hooks/)
 - **TypeScript-based hooks** that intercept Claude Code pipeline events
-- **Session tracking** with automatic logging to `.claude/logs/YYYY-MM-DD.md`
+- **Session tracking** with JSON data stored in `.claude/session/`
 - **Safety mechanisms** that block dangerous commands (rm -rf, etc.)
 - **Auto-context addition** based on prompt keywords
 - **Sound notifications** on session completion using local `sounds/completion.aiff`
@@ -50,10 +62,11 @@ This is an **AI Agents Boilerplate** repository designed to provide reusable Cla
 - **Workflow patterns**: TodoWrite usage for complex tasks (3+ steps), parallel tool execution
 - **Quality standards**: Security-first approach, follow existing code conventions
 
-### Auto-Logging (.claude/logs/)
-- **Time-based entries** in format `## HH:MM - Title`
-- **Structured Variant B format** for AI readability
-- **Daily session logs** with automatic categorization
+### Logging System (logs/)
+- **AI chat logs** in `logs/ai/YYYY-MM-DD.md` with structured entries and collapsible transcripts
+- **JSONL logs** via `tools/logging/ai_log.sh` for structured data
+- **Daily notes** in `logs/notes/YYYYMMDD.txt` for quick references
+- **Shared `log-ai-chat.sh` script** for both Claude and Cursor/Copilot integration
 
 ## Runtime Environment
 

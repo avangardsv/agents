@@ -6,14 +6,13 @@
   - `rules/` — communication, workflow, and quality rules
   - `logs/` — auto-generated daily logs for Claude sessions
   - `exports/`, `docs/`, `settings.json` — exports, docs, config
-- `workflows/` — helper scripts (e.g., `log-ai-chat.sh` for log capture)
+- `scripts/` — helper scripts (e.g., `log-ai-chat.sh` for log capture)
 - `schemas/` — JSON/task schemas (e.g., `tasks.json`)
 - `logs/` — project-level logs (ignored by Git)
 - `temp/` — scratch space (ignored)
 
 ## Build, Test, and Development Commands
-- Install hook deps: `cd .claude/hooks && bun install`
-- Run hooks (per session): `cd .claude/hooks && bun run index.ts`
+- Optional Claude hooks: `cd .claude/hooks && bun install && bun run index.ts` (Claude Code works without hooks; run only if you want auto‑logging/extra features.)
 - View today’s log: `cat .claude/logs/$(date +%F).md`
 - Validate configs:
   - YAML: `yamllint path/to/file.yml`
@@ -21,10 +20,11 @@
   - Shell: `shellcheck script.sh && bash -n script.sh`
 
 ## AI Logging Policy (Required)
-- Log every time you ask something or receive an AI reply using the workflow script.
-- Clipboard flow: `pbpaste | ./workflows/log-ai-chat.sh --source=claude --title="Brief title" --tags=planning`
-- File flow: `./workflows/log-ai-chat.sh --source=chatgpt --file=transcript.txt --title="Refactor plan" --note="key changes"`
-- Outputs go to `logs/ai/YYYY-MM-DD.md` (markdown), `logs/notes/YYYYMMDD.txt` (one‑liners), and JSONL via `tools/logging/ai_log.sh`.
+- Log every time you ask or get an AI reply using the script.
+- Clipboard: `make log-clipboard` (title auto‑set to today’s date)
+- File: `make log-file FILE=transcript.txt` (title auto‑set to today’s date)
+- Default source is `claude`; override via `make log-clipboard SOURCE=codex` if needed.
+- Outputs go to `logs/ai/YYYY-MM-DD.md` and `logs/notes/YYYYMMDD.txt`.
 
 ## Coding Style & Naming Conventions
 - Language: TypeScript (ES modules) in `.claude/hooks/`

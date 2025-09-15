@@ -67,7 +67,7 @@ read_from_clipboard() {
 }
 
 SOURCE=""
-TITLE="Untitled Chat"
+TITLE=""
 TAGS=""
 ROLE="response"
 FILE_INPUT=""
@@ -87,9 +87,12 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ -z "$SOURCE" ]]; then
-  log_error "--source is required (chatgpt|claude|copilot|other)"
-  usage
-  exit 1
+  SOURCE="claude"
+fi
+
+# Set defaults if not provided
+if [[ -z "$TITLE" ]]; then
+  TITLE=$(date '+%Y-%m-%d')
 fi
 
 mkdir -p "$LOG_DIR" "$AI_DIR" "$NOTES_DIR"
@@ -166,4 +169,3 @@ fi
 printf "%s %s\n" "$TIME_LOCAL" "$NOTE_TEXT" >> "$NOTES_FILE"
 
 log_success "Chat logged to JSONL, appended to $DAILY_MD, noted in $NOTES_FILE"
-

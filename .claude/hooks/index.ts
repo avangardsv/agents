@@ -13,10 +13,23 @@ import type {
 import {runHook} from './lib'
 import {saveSessionData} from './session'
 
+// Helper function to log using log-ai-chat script
+async function logToAIChat(title: string, content: string, role: string = 'response') {
+  try {
+    const scriptPath = `${import.meta.dir}/../../scripts/log-ai-chat.sh`
+    await Bun.$`echo ${content} | bash ${scriptPath} --source=claude --title=${title} --role=${role}`
+  } catch (error) {
+    console.error('Failed to log to AI chat:', error)
+  }
+}
+
 // SessionStart handler - called when a new Claude session starts
 const sessionStart: SessionStartHandler = async (payload) => {
   // Save session data (optional - remove if not needed)
   await saveSessionData('SessionStart', {...payload, hook_type: 'SessionStart'} as const)
+  
+  // Log to AI chat system
+  await logToAIChat('Session Started', `New Claude Code session started from: ${payload.source}\nSession ID: ${payload.session_id}`)
 
   // Example: Log session start with source
   console.log(`🚀 New session started from: ${payload.source}`)
@@ -101,6 +114,9 @@ const notification: NotificationHandler = async (payload) => {
 // Stop handler - called when Claude stops
 const stop: StopHandler = async (payload) => {
   await saveSessionData('Stop', {...payload, hook_type: 'Stop'} as const)
+  
+  // Log session end to AI chat system
+  await logToAIChat('Session Ended', 'Claude Code session completed')
 
   // Play completion sound from local project file
   try {
@@ -134,6 +150,9 @@ const subagentStop: SubagentStopHandler = async (payload) => {
 // UserPromptSubmit handler - called when the user submits a prompt
 const userPromptSubmit: UserPromptSubmitHandler = async (payload) => {
   await saveSessionData('UserPromptSubmit', {...payload, hook_type: 'UserPromptSubmit'} as const)
+  
+  // Log user prompt to AI chat system
+  await logToAIChat('User Prompt', payload.prompt, 'prompt')
 
   // Example: Log user prompts
   console.log(`💬 User prompt: ${payload.prompt}`)

@@ -3,7 +3,7 @@ import {tmpdir} from 'node:os'
 import * as path from 'node:path'
 import type {HookPayload} from './lib'
 
-const SESSIONS_DIR = path.join(process.cwd(), 'logs', 'sessions')
+const SESSIONS_DIR = path.join(process.cwd(), '.claude', 'session')
 
 export async function saveSessionData(hookType: string, payload: HookPayload): Promise<void> {
   try {
