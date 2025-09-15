@@ -5,3 +5,6 @@
 # Keep structure but allow logs to be committed for team visibility
 # Uncomment next line if you want to ignore all logs:
 # *.log
+# Ignore generated logs (AI/chat/session notes) recursively
+logs/
+temp
